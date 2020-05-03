@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>What is my IP?</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-<script>
-var oReq = new XMLHttpRequest();
-oReq.addEventListener("load", function(){
-  const obj = JSON.parse(this.response);
-  //console.log(obj.origin);
-  document.write(obj.origin);
-});
-oReq.open("GET", "https://httpbin.org/ip");
-oReq.send();
-</script>
-</body>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>What is my IP?</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <p id="myip"></p>
+
+    <!-- LINE BUTTON -->
+    <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="https://seigim.github.io/MyIP/" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
+    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
+    <!-- fetch Global IP -->
+    <script>
+      var oReq = new XMLHttpRequest();
+      oReq.addEventListener("load", function(){
+        const obj = JSON.parse(this.response);
+        document.getElementById('myip').innerHTML = obj.origin;
+      });
+      oReq.open("GET", "https://httpbin.org/ip");
+      oReq.send();
+    </script>
+  </body>
 </html>
