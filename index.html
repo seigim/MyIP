@@ -1,1 +1,21 @@
-What is MyIP?
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>What is my IP?</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<script>
+var oReq = new XMLHttpRequest();
+oReq.addEventListener("load", function(){
+  const obj = JSON.parse(this.response);
+  //console.log(obj.origin);
+  document.write(obj.origin);
+});
+oReq.open("GET", "https://httpbin.org/ip");
+oReq.send();
+</script>
+</body>
+</html>
