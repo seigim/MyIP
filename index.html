@@ -5,20 +5,37 @@
     <title>What is my IP?</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <p id="myip"></p>
-
-    <!-- LINE BUTTON -->
-    <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="https://seigim.github.io/MyIP/" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
-    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-
+    <h1>What is my IP?</h1>
+    <p id="myip">読込中</p>
+    <p id="button"></p>
     <!-- fetch Global IP -->
     <script>
       var oReq = new XMLHttpRequest();
       oReq.addEventListener("load", function(){
         const obj = JSON.parse(this.response);
+
         document.getElementById('myip').innerHTML = obj.origin;
+
+        let img = document.createElement('img');
+        img.setAttribute("src", "./line.png");
+        img.setAttribute("width", "119");
+        img.setAttribute("height", "30");
+        img.setAttribute("alt", "LINEで送る");
+
+        const url = "https://line.naver.jp/R/msg/text/私のIPは " + obj.origin + " です";
+        let lineButton = document.createElement('a');
+        lineButton.setAttribute("href", url);
+        lineButton.id = "share-link";
+        lineButton.appendChild(img);
+
+        document.getElementById('button').appendChild(lineButton);
       });
       oReq.open("GET", "https://httpbin.org/ip");
       oReq.send();
